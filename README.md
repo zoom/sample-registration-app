@@ -55,10 +55,12 @@ ZM_SECRET={{ YOUR API KEY HERE }}
 
 ### Start the Server
 
-To start the server in development mode run the `dev` script. This will send detailed logs to the console and error
-pages.
+As the default database for this project lives in-memory each time you restart the server the database will be cleared. See our section on 
+[Configuring MongoDB](#configuring-mongodb).
 
 #### Development
+To start the server in development mode run the `dev` script. This will send detailed logs to the console and error
+pages.
 
 ```shell
 npm run dev
