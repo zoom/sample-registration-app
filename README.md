@@ -11,7 +11,7 @@ It's built using familiar packages such as:
 1. [Expressjs](https://expressjs.com/)
 2. [Handlebars](https://handlebarsjs.com/)
 3. [Bulma](https://bulma.io/)
-4. [In-memory MongoDB Server](https://github.com/nodkz/mongodb-memory-server). 
+4. [In-memory MongoDB Server](https://github.com/nodkz/mongodb-memory-server) 
 
 ## Prerequisites
 
@@ -121,7 +121,7 @@ You can run `npm run lint` to see the linter errors directly or your can use `np
 fix the issues for you. Most IDEs can also automatically fix linter errors as you save.
 
 ### Testing
-At this time there are no e2e or unit tests as this is a sample. This may be added in the future and I encourage you to create a pull request adding tests.
+At this time there are no e2e or unit tests. I encourage you to create a pull request adding tests! I hear [Cypress](https://www.cypress.io/) is a great framework :)
 
 ## Need help?
 
