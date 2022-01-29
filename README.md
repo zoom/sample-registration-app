@@ -6,16 +6,21 @@ This application is an example of how you can use
 the [Zoom API](https://marketplace.zoom.us/docs/api-reference/zoom-api)
 to create your own webinar registration app.
 
-It's built using packages to help developers debug as well as [expressjs](https://expressjs.com/)
-, [handlebars](https://handlebarsjs.com/)
-, [bulma](https://bulma.io/) and an [in-memory MongoDB server](https://github.com/nodkz/mongodb-memory-server). This
-means this sample is easy to deploy with standard mongodb instances.
+It's built using familiar packages such as:
+
+1. [Expressjs](https://expressjs.com/)
+2. [Handlebars](https://handlebarsjs.com/)
+3. [Bulma](https://bulma.io/)
+4. [In-memory MongoDB Server](https://github.com/nodkz/mongodb-memory-server). 
 
 ## Prerequisites
 
-In order to use this app you must have a **API Key** and **API Secret** from
-the [Zoom Marketplace](https://marketplace.zoom.us/) which can be obtained by
-following [this guide](https://marketplace.zoom.us/docs/api-reference/using-zoom-apis#using-jwt).
+1. A Zoom Account
+   1. [Pro Plan or higher](https://support.zoom.us/hc/en-us/articles/207278726-Plan-Types-)
+   2. [Webinar Add-on](https://support.zoom.us/hc/en-us/articles/200917029)
+2. The API Key and Secret from a [Zoom JWT App](https://marketplace.zoom.us/docs/guides/auth/jwt/)
+
+You can follow [this guide](https://marketplace.zoom.us/docs/guides/build/jwt-app/) to create a JWT app with the [Zoom Marketplace](https://marketplace.zoom.us/).
 
 ## Installation
 
@@ -52,14 +57,20 @@ ZM_KEY={{ YOUR API KEY HERE }}
 ZM_SECRET={{ YOUR API SECRET HERE }}
 ```
 
-### Start the Server
+## Start the Server
 
 As the default database for this project lives in-memory each time you restart the server the database will be cleared. See our section on 
 [Configuring MongoDB](#configuring-mongodb).
 
 #### Development
-To start the server in development mode run the `dev` script. This will send detailed logs to the console and error
-pages.
+To start the server in development mode run the NPM `dev` script. This will do the following:
+
+1. Send detailed logs to the server console and error pages
+2. Restart the server on changes to server files - this will clear the in-memory DB 
+   1. To change this use a standard mongod instance 
+   2. or use `node` instead of `nodemon` for the `dev` script in [package.json](package.json)
+   3. or start the server using the `start` NPM script (see next section)
+
 
 ```shell
 npm run dev
@@ -68,7 +79,7 @@ npm run dev
 #### Production
 
 You can use the `start` script to run the server in production mode. This allows the app to run faster but it does not
-log by default.
+log by default and does watch for files changes.
 
 ```shell
 npm run start
@@ -99,7 +110,7 @@ If you want to use a real instance of MongoDB, all you need to do is:
 2. Provide `mongoose.connect()` with your connection string in [server/index.js](server/index.js).
 
 ## Contribution
-Please send pull requests and issues to this project for any issues or suggestions that you have.
+Please send pull requests and issues to this project for any issues or suggestions that you have!
 
 ### Code Style
 
@@ -107,7 +118,7 @@ This project uses eslint to enforce a coding style along with a pre-commit git h
 to commit.
 
 You can run `npm run lint` to see the linter errors directly or your can use `npm run lint-fix` to have eslint try to
-fix the issues for you.
+fix the issues for you. Most IDEs can also automatically fix linter errors as you save.
 
 ### Testing
 At this time there are no e2e or unit tests as this is a sample. This may be added in the future and I encourage you to create a pull request adding tests.
