@@ -1,0 +1,46 @@
+<div class="columns is-centered">
+    <div class="column">
+        <p class="has-text-centered is-size-5">
+            Enter a Webinar ID from your Zoom account and click
+            <span class="has-text-info has-text-weight-bold">Go</span> or navigate to
+            <br>
+            <a id="registrationLink"href="">
+                <span id="baseURLTxt"></span><span id="webinarIdTxt">:webinar_id</span>
+            </a>
+        </p>
+    </div>
+</div>
+
+<script>
+    // span containing the current base URL
+    const baseURLTxt = document.getElementById('baseURLTxt')
+
+    // format the baseURL of the page
+    baseURLTxt.innerHTML = ((u = window.location) =>
+            `${u.protocol}//${u.host}/${u.pathname.split('/')[1]}r/`)()
+
+    document.addEventListener('DOMContentLoaded', () => {
+        // span for the webinar ID shown to the user
+        const webinarIdTxt = document.getElementById('webinarIdTxt');
+
+        // anchor tag for the current URL link
+        const registrationLink = document.getElementById('registrationLink');
+
+
+        // Change the registration link as the user types in the webinar ID input
+        webinarIdInp.addEventListener('input', (e) => {
+            const input = e.target.value
+
+            let id = ':webinar_id'
+            let href = baseURLTxt.innerHTML
+
+            if (input) {
+                id = sanitizeId(input)
+                href += id.toString()
+            }
+
+            webinarIdTxt.innerText = id
+            registrationLink.setAttribute('href', href)
+        })
+    })
+</script>

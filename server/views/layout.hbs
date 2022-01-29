@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{{title}}</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+<div class="container">
+    <nav id="navBar" class="navbar is-transparent">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="/">
+                <img src="https://st1.zoom.us/static/5.2.4185/image/new/ZoomLogo.png" alt="Zoom Regitration App"
+                     width="112" height="28">
+            </a>
+        </div>
+        <div id="navbar" class="navbar-menu">
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="field has-addons">
+                        <div class="control">
+                            <input id="webinarId" class="input" placeholder="Webinar ID" type="text" autocomplete="off">
+                        </div>
+                        <div class="control">
+                            <button id="goBtn" class="button is-info" disabled>Go</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+<section class="section is-large">
+    <div class="container">
+        <div class="columns is-centered">
+            <div class="column is-four-fifths-desktop">
+                <div class="card {{cardClass}}">
+                    <div class="card-content">
+                        <div class="media mt-5">
+                            <div class="media-content has-text-centered">
+                                <p class="title is-4 {{textClass}}">{{cardTitle}}</p>
+                                <p class="subtitle is-6 {{textClass}}">
+                                    {{#if startTime}}
+                                        {{calendar startTime}}
+                                    {{ else }}
+                                        {{cardText}}
+                                    {{/if}}
+                                </p>
+                            </div>
+                        </div>
+                        <section class="section">
+                            {{{body}}}
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    /**
+     * Set is-loading class on an element and disable it
+     * @param {Element} el - the element to operate on
+     * @param {Boolean} isLoading - If the element is loading
+     * @param {Boolean} disable - if the element should also be disabled - set to false for submit buttons
+     */
+    function isLoading(el, isLoading = true, disable = true) {
+        const c = 'is-loading'
+
+        if (isLoading)
+            el.classList.add(c)
+        else
+            el.classList.remove(c)
+
+        el.disabled = isLoading && disable
+    }
+
+    /**
+     * Remove non-digits, whitespace and extra chars from a Webinar ID
+     * @param {String} id - Webinar ID
+     * @return {String} sanitized id string
+     */
+    function sanitizeId(id) {
+        return id.replace(/\D|\s/g, '').substring(0, 11)
+    }
+
+    // Webinar ID input - global because this is used by the index route
+    const webinarIdInp = document.getElementById('webinarId')
+
+    document.addEventListener('DOMContentLoaded', () => {
+        // 'Go button' to redirect to webinar registration
+        const goBtn = document.getElementById('goBtn')
+
+        // Only allow numeric values to be entered in the webinar ID input
+        webinarIdInp.addEventListener('keypress', (e) => {
+            // if the user pressed enter perform the search
+            if (e.key === 'Enter')
+                return goBtn.click()
+
+            // make sure the key will create a valid ID
+            const isTooLong = e.target.value.length >= 11
+            const isNotNum = /\D/.test(e.key)
+
+            if (isTooLong || isNotNum)
+                e.preventDefault()
+        })
+
+        // Format the ID when pasted
+        webinarIdInp.addEventListener('paste', (e) => {
+            webinarIdInp.value = sanitizeId((e.clipboardData || window.clipboardData).getData('text'))
+        })
+
+        // Format the ID when entered manually
+        webinarIdInp.addEventListener('input', (e) => {
+            goBtn.disabled = e.target.value.length < 11
+            webinarIdInp.value = sanitizeId(e.target.value)
+        })
+
+        // Navigate to the registration page when the go button is clicked
+        goBtn.addEventListener('click', () => {
+            isLoading(webinarIdInp)
+            isLoading(goBtn)
+            window.location = `/r/${sanitizeId(webinarIdInp.value)}`
+        })
+    })
+</script>
+</body>
+</html>

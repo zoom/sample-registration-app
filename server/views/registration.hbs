@@ -1,0 +1,179 @@
+<form id="registerForm" method="POST" autocomplete="off">
+    <div class="columns is-centered is-variable is-6">
+        <div class="column is-fullwidth is-two-fifths-desktop">
+            <div class="field">
+                <label class="label {{textClass}}">First Name</label>
+                <div class="control">
+                    <input id="fname" name="fname" class="input" type="text" placeholder="Jane" maxlength="64"
+                           required>
+                </div>
+            </div>
+        </div>
+        <div class="column is-two-fifths-desktop ">
+            <div class="field">
+                <label class="label {{textClass}}">Last Name</label>
+                <div class="control">
+                    <input id="lname" name="lname" class="input" type="text" placeholder="Doe" maxlength="64"
+                           required>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="columns is-centered is-variable is-6">
+        <div class="column is-two-fifths-desktop">
+            <div class="field">
+                <label class="label {{textClass}}">Email</label>
+                <div class="control">
+                    <input id="email" class="input" type="email" name="email" placeholder="example@example.com"
+                           maxlength="128" required>
+                </div>
+            </div>
+        </div>
+        <div class="column is-two-fifths-desktop">
+            <div class="field">
+                <label class="label {{textClass}}">Confirm Email</label>
+                <div class="control">
+                    <input id="confirmEmail" class="input" type="email" name="confirmEmail"
+                           placeholder="example@example.com" maxlength="128" required>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="columns is-centered is-variable mt-5">
+        <div class="column is-four-fifths-desktop">
+            <div class="field is-grouped is-grouped-right">
+                <div class="control">
+                    <button id="registerBtn" class="button is-info" type="submit" disabled>Register</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+    /**
+     * Check if a name passed validation
+     * @param {string} nm { - name to validate
+     * @return {boolean} false if the name is blank or too long
+     */
+    function validateName(nm) {
+        return nm !== '' && nm.length <= 64
+    }
+
+    /**
+     * Check if emails pass validation
+     * @param {string} em - one of the emails to compare
+     * @param {string} other - the other email to compare
+     * @return {boolean} true if 'other' is blank or 'em' matches regex and the emails are equal
+     */
+    function validateEmail(em, other) {
+        // make sure this is actually an email
+        const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        const emailIsValid = em.toLowerCase().match(emailRegex);
+
+        // Don't invalidate the email if the user hasn't typed in the confirmation yet
+        const emailsMatch = em === other || other === ''
+
+        return emailIsValid && emailsMatch
+    }
+
+    /**
+     * When there is a validation error set the is-danger class on an element
+     * @param {Element} el - element to apply the class to
+     * @param {Boolean} valid  - if there is a validation error
+     */
+    function setInvalidClass(el, valid) {
+        const c = 'is-danger'
+
+        if (valid)
+            el.classList.remove(c)
+        else
+            el.classList.add(c)
+    }
+
+    /**
+     * Shorthand to remove the invalid class on an element
+     * @param el {Element} - the element
+     */
+    function setValid(el) {
+        return setInvalidClass(el, true)
+    }
+
+    /**
+     * Shorthand to add the invalid class to an element
+     * @param {Element} el - the element
+     */
+    function setInvalid(el) {
+        return setInvalidClass(el, false)
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        // input element for the first name
+        const fname = document.getElementById('fname')
+
+        // input element for the last name
+        const lname = document.getElementById('lname')
+
+        // input element for the email
+        const email = document.getElementById('email')
+
+        // input element for the confirmation email
+        const confirmEmail = document.getElementById('confirmEmail')
+
+        // submit button for the form
+        const registerBtn = document.getElementById('registerBtn')
+
+        // the form itself
+        const registerForm = document.getElementById('registerForm')
+
+
+        // Enable the submit button if all fields are valid otherwise show errors
+        const checkForm = (em = email, conf = confirmEmail) => {
+            const hasFname = validateName(fname.value)
+            const hasLname = validateName(lname.value)
+            let hasEmail = validateEmail(em.value, conf.value)
+
+            // our validator doesn't throw an error if only one is blank so let's make sure they aren't
+            hasEmail &= em.value !== '' && conf.value !== ''
+
+            const isValid = hasFname && hasLname && hasEmail
+
+            registerBtn.disabled = !isValid
+
+            return isValid
+        }
+
+        // return event handler that sets validates email fields
+        const emailInputEvt = other => ({target}) => {
+            if (validateEmail(target, other)) {
+                setValid(target)
+                setValid(other)
+            } else {
+                setInvalid(target)
+            }
+
+            checkForm()
+        }
+
+        // an event handler to validate changes to name inputs
+        const nameInputEvt = ({target}) => {
+            setInvalidClass(target, validateName(target))
+            checkForm()
+        }
+
+        fname.addEventListener('input', nameInputEvt)
+        lname.addEventListener('input', nameInputEvt)
+
+        email.addEventListener('input', emailInputEvt(confirmEmail))
+        confirmEmail.addEventListener('input', emailInputEvt(email))
+
+        registerForm.addEventListener('submit', (e) => {
+            if (checkForm())
+                return isLoading(registerBtn, true, false)
+
+            e.preventDefault()
+            e.stopPropagation()
+        })
+    })
+</script>
+
