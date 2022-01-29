@@ -63,6 +63,9 @@
 </section>
 
 <script>
+    // Expected String.length of a Webinar ID
+    const ID_LENGTH = 11
+
     /**
      * Set is-loading class on an element and disable it
      * @param {Element} el - the element to operate on
@@ -86,11 +89,13 @@
      * @return {String} sanitized id string
      */
     function sanitizeId(id) {
-        return id.replace(/\D|\s/g, '').substring(0, 11)
+        return id.replace(/\D|\s/g, '').substring(0, ID_LENGTH)
     }
 
     // Webinar ID input - global because this is used by the index route
     const webinarIdInp = document.getElementById('webinarId')
+
+
 
     document.addEventListener('DOMContentLoaded', () => {
         // 'Go button' to redirect to webinar registration
@@ -98,27 +103,25 @@
 
         // Only allow numeric values to be entered in the webinar ID input
         webinarIdInp.addEventListener('keypress', (e) => {
-            // if the user pressed enter perform the search
-            if (e.key === 'Enter')
-                return goBtn.click()
+            const v = sanitizeId(e.target.value)
+            const isEnter = e.key === 'Enter'
 
-            // make sure the key will create a valid ID
-            const isTooLong = e.target.value.length >= 11
+            const isTooLong = v.length >= ID_LENGTH
             const isNotNum = /\D/.test(e.key)
 
+            // if the user pressed enter perform the search
             if (isTooLong || isNotNum)
-                e.preventDefault()
+                return e.preventDefault()
+            else if (isEnter)
+                return goBtn.click()
         })
+
 
         // Format the ID when pasted
-        webinarIdInp.addEventListener('paste', (e) => {
-            webinarIdInp.value = sanitizeId((e.clipboardData || window.clipboardData).getData('text'))
-        })
-
-        // Format the ID when entered manually
         webinarIdInp.addEventListener('input', (e) => {
-            goBtn.disabled = e.target.value.length < 11
-            webinarIdInp.value = sanitizeId(e.target.value)
+            const v = sanitizeId(e.target.value)
+            goBtn.disabled = v.length !== ID_LENGTH
+            webinarIdInp.value =  v
         })
 
         // Navigate to the registration page when the go button is clicked
