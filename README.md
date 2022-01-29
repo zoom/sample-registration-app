@@ -38,8 +38,6 @@ npm install
 ```
 
 ### Add Your Credentials
-If you haven't created a Zoom JWT App already make sure that you head to the [Zoom Marketplace](https://marketplace.zoom.us) and follow our guide on [Creating a JWT App](https://marketplace.zoom.us/docs/guides/auth/jwt/). When you're done, you should have an API Key and API Secret to use with this app.
-
 Create a .env file in the current directory
 
 ```shell
@@ -51,7 +49,7 @@ the [Zoom Marketplace](https://marketplace.zoom.us/):
 
 ```text
 ZM_KEY={{ YOUR API KEY HERE }}
-ZM_SECRET={{ YOUR API KEY HERE }}
+ZM_SECRET={{ YOUR API SECRET HERE }}
 ```
 
 ### Start the Server
