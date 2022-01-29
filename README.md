@@ -19,13 +19,13 @@ following [this guide](https://marketplace.zoom.us/docs/api-reference/using-zoom
 
 ## Installation
 
-To get started, clone the repo:
+To get started clone the repo:
 
 ```shell
 git clone https://github.com/zoom/sample-registration-app.git
 ```
 
-Once cloned, navigate to the `sample-registration-app` directory:
+Once cloned navigate to the `sample-registration-app` directory:
 
 ```
 cd sample-registration-app
@@ -38,6 +38,7 @@ npm install
 ```
 
 ### Add Your Credentials
+If you haven't created a Zoom JWT App already make sure that you head to the [Zoom Marketplace](https://marketplace.zoom.us) and follow our guide on [Creating a JWT App](https://marketplace.zoom.us/docs/guides/auth/jwt/). When you're done, you should have an API Key and API Secret to use with this app.
 
 Create a .env file in the current directory
 
@@ -45,7 +46,7 @@ Create a .env file in the current directory
 touch .env
 ```
 
-Edit the file and add the following text, replacing the fields with **your actual API Key and API Secret** from
+Edit the file and add the following text replacing the fields with **your actual API Key and API Secret** from
 the [Zoom Marketplace](https://marketplace.zoom.us/):
 
 ```text
