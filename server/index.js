@@ -1,31 +1,28 @@
-import { MongoMemoryServer } from 'mongodb-memory-server';
 import http from 'http'
 import debug from 'debug'
-import mongoose from 'mongoose';
+import mongoose from 'mongoose'
+import { MongoMemoryServer } from 'mongodb-memory-server'
 import app from '../app.js'
 
+// connect to the in-memory mongodb instance
 const mongod = await MongoMemoryServer.create()
-
-// connect to the mongodb in-memory database
 await mongoose.connect(mongod.getUri())
 
 /**
  * Normalize a port into a number, string, or false.
- * @param {Number} port  - port to normalize
- * @return {boolean|number|*} normalized port number on success or false on failure
+ * @param {String} port  - port to normalize
+ * @return {Boolean|Number|*} normalized port number on success or false on failure
  */
 function normalizePort(port) {
     const p = parseInt(port, 10);
 
-    if (Number.isNaN(p)) {
-        // named pipe
+    // named pipe
+    if (Number.isNaN(p))
         return port;
-    }
 
-    if (p >= 0) {
-        // port number
+    // port number
+    if (p >= 0)
         return p;
-    }
 
     return false;
 }
@@ -36,7 +33,6 @@ app.set('port', port);
 
 // Create HTTP server
 const server = http.createServer(app);
-
 
 // Listen on provided port, on all network interfaces
 server.listen(port);
