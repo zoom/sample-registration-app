@@ -76,7 +76,9 @@ const hbs = exphbs.create({
     extname: '.hbs',
     defaultLayout: 'layout',
     helpers: {
-        calendar: t => moment(t).calendar()
+        calendar: t => moment(t).calendar(null, {
+            sameElse: 'LLL'
+        })
     },
 })
 
