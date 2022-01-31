@@ -1,10 +1,9 @@
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import http from 'http'
-import dbg from 'debug'
-import mongoose from "mongoose";
+import debug from 'debug'
+import mongoose from 'mongoose';
 import app from '../app.js'
 
-const debug = dbg('SRA:server')
 const mongod = await MongoMemoryServer.create()
 
 // connect to the mongodb in-memory database
@@ -53,7 +52,7 @@ server.on('listening', () => {
     const bind = typeof addr === 'string'
         ? `pipe ${addr}`
         : `http://localhost:${addr.port}`;
-    debug(`Listening on ${bind}`);
+    debug('SRA:server')(`Listening on ${bind}`);
 });
 
 // disconnect from the DB on error
