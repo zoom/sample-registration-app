@@ -95,8 +95,6 @@
     // Webinar ID input - global because this is used by the index route
     const webinarIdInp = document.getElementById('webinarId')
 
-
-
     document.addEventListener('DOMContentLoaded', () => {
         // 'Go button' to redirect to webinar registration
         const goBtn = document.getElementById('goBtn')
@@ -115,7 +113,6 @@
             else if (isEnter)
                 return goBtn.click()
         })
-
 
         // Format the ID when pasted
         webinarIdInp.addEventListener('input', (e) => {
