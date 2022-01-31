@@ -145,7 +145,7 @@
 
         // return event handler that sets validates email fields
         const emailInputEvt = other => ({target}) => {
-            if (validateEmail(target, other)) {
+            if (validateEmail(target.value, other.value)) {
                 setValid(target)
                 setValid(other)
             } else {
@@ -157,7 +157,7 @@
 
         // an event handler to validate changes to name inputs
         const nameInputEvt = ({target}) => {
-            setInvalidClass(target, validateName(target))
+            setInvalidClass(target, validateName(target.value))
             checkForm()
         }
 
