@@ -40,6 +40,8 @@ cd sample-registration-app
 
 ## Setup
 
+Install the dependencies with npm
+
 ```
 npm install
 ```
