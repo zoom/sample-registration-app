@@ -38,7 +38,7 @@ Once cloned navigate to the `sample-registration-app` directory:
 cd sample-registration-app
 ```
 
-### Install Dependencies
+## Setup
 
 ```
 npm install
