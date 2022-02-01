@@ -42,8 +42,8 @@
                     <div class="card-content">
                         <div class="media mt-5">
                             <div class="media-content has-text-centered">
-                                <p class="title is-4">{{cardTitle}}</p>
-                                <p class="subtitle is-6">
+                                <p class="title is-4 {{textClass}}">{{cardTitle}}</p>
+                                <p class="subtitle is-6 {{textClass}}">
                                     {{#if startTime}}
                                         {{calendar startTime}}
                                     {{ else }}
@@ -118,7 +118,7 @@
         webinarIdInp.addEventListener('input', (e) => {
             const v = sanitizeId(e.target.value)
             goBtn.disabled = v.length !== ID_LENGTH
-            webinarIdInp.value =  v
+            webinarIdInp.value = v
         })
 
         // Navigate to the registration page when the go button is clicked
