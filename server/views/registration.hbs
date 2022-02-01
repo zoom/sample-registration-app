@@ -67,12 +67,13 @@
      * @return {boolean} true if 'other' is blank or 'em' matches regex and the emails are equal
      */
     function validateEmail(em, other) {
+        const lowEm = em.toLowerCase()
         // make sure this is actually an email
         const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        const emailIsValid = em.toLowerCase().match(emailRegex);
+        const emailIsValid = lowEm.match(emailRegex);
 
         // Don't invalidate the email if the user hasn't typed in the confirmation yet
-        const emailsMatch = em === other || other === ''
+        const emailsMatch = lowEm === other.toLowerCase() || other === ''
 
         return emailIsValid && emailsMatch
     }
