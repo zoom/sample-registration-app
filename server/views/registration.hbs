@@ -80,7 +80,7 @@
     /**
      * When there is a validation error set the is-danger class on an element
      * @param {Element} el - element to apply the class to
-     * @param {Boolean} valid  - if there is a validation error
+     * @param {Boolean} valid  - if th element value is valid
      */
     function setInvalidClass(el, valid) {
         const c = 'is-danger'
@@ -89,22 +89,6 @@
             el.classList.remove(c)
         else
             el.classList.add(c)
-    }
-
-    /**
-     * Shorthand to remove the invalid class on an element
-     * @param el {Element} - the element
-     */
-    function setValid(el) {
-        return setInvalidClass(el, true)
-    }
-
-    /**
-     * Shorthand to add the invalid class to an element
-     * @param {Element} el - the element
-     */
-    function setInvalid(el) {
-        return setInvalidClass(el, false)
     }
 
     document.addEventListener('DOMContentLoaded', () => {
@@ -146,10 +130,10 @@
         // return event handler that sets validates email fields
         const emailInputEvt = other => ({target}) => {
             if (validateEmail(target.value, other.value)) {
-                setValid(target)
-                setValid(other)
+                setInvalidClass(target, true)
+                setInvalidClass(other, true)
             } else {
-                setInvalid(target)
+                setInvalidClass(target, false)
             }
 
             checkForm()
