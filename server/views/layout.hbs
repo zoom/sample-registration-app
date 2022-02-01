@@ -99,22 +99,7 @@
         // 'Go button' to redirect to webinar registration
         const goBtn = document.getElementById('goBtn')
 
-        // Only allow numeric values to be entered in the webinar ID input
-        webinarIdInp.addEventListener('keypress', (e) => {
-            const v = sanitizeId(e.target.value)
-            const isEnter = e.key === 'Enter'
-
-            const isTooLong = v.length >= ID_LENGTH
-            const isNotNum = /\D/.test(e.key)
-
-            // if the user pressed enter perform the search
-            if (isTooLong || isNotNum)
-                return e.preventDefault()
-            else if (isEnter)
-                return goBtn.click()
-        })
-
-        // Format the ID when pasted
+        // Format the ID when pasted or typed
         webinarIdInp.addEventListener('input', (e) => {
             const v = sanitizeId(e.target.value)
             goBtn.disabled = v.length !== ID_LENGTH
