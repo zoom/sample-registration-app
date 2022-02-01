@@ -16,7 +16,7 @@
     const baseURLTxt = document.getElementById('baseURLTxt')
 
     // format the baseURL of the page
-    baseURLTxt.innerHTML = ((u = window.location) =>
+    baseURLTxt.innerText = ((u = window.location) =>
             `${u.protocol}//${u.host}/${u.pathname.split('/')[1]}r/`)()
 
     document.addEventListener('DOMContentLoaded', () => {
@@ -32,7 +32,7 @@
             const input = e.target.value
 
             let id = ':webinar_id'
-            let href = baseURLTxt.innerHTML
+            let href = baseURLTxt.innerText
 
             if (input) {
                 id = sanitizeId(input)
