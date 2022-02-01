@@ -2,7 +2,7 @@ import express from 'express'
 import exphbs from 'express-handlebars'
 import compression from 'compression'
 import createError from 'http-errors'
-import { URL } from 'url'
+import {URL} from 'url'
 
 import moment from 'moment'
 import cookieParser from 'cookie-parser'
@@ -25,26 +25,21 @@ const dbg = debug('SRA:app')
 const errs = debug('SRA:errors')
 
 dotenv.config()
+const {ZM_KEY, ZM_SECRET} = process.env
 
 /**
  * Generates a JWT token for the Zoom API
  * @see https://github.com/zoom/zoom-api-jwt
+ * @see https://github.com/brandonabajelo-zoom/jwt-gen/
+ * @see https://marketplace.zoom.us/docs/guides/build/jwt-app/
  * @param exp - seconds until the token expires
  * @return {string} a JWT token
  */
-function generateJWT(exp = 2) {
+function generateJWT(exp = 5) {
     if (typeof exp !== 'number' || exp <= 0)
         throw createError(500, 'generateJWT(): exp parameter expected to be a number greater than 0')
 
-    const d = new Date()
-    d.setSeconds(d.getSeconds() + exp)
-
-    const payload = {
-        iss: process.env.ZM_KEY,
-        exp: d.valueOf()
-    }
-
-    return jwt.sign(payload, process.env.ZM_SECRET)
+    return jwt.sign({iss: ZM_KEY}, ZM_SECRET, {expiresIn: exp})
 }
 
 /**
