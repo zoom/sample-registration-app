@@ -5,7 +5,7 @@ Use of this sample app is subject to our [Terms of Use](https://zoom.us/docs/en-
 This application is an example of how you can use
 the [Zoom API](https://marketplace.zoom.us/docs/api-reference/zoom-api)
 to create your own webinar registration app that stays within the
-Zoom [Rate Limits](https://marketplace.zoom.us/docs/api-reference/rate-limits)
+Zoom [Rate Limits](https://marketplace.zoom.us/docs/api-reference/rate-limits).
 
 It's built using mostly standard HTML, CSS and JS with familiar packages such as:
 
@@ -40,7 +40,7 @@ cd sample-registration-app
 
 ## Setup
 
-Install the dependencies with npm
+Install the dependencies
 
 ```
 npm install
@@ -55,7 +55,7 @@ touch .env
 ```
 
 Edit the file and add the following text replacing the fields with **your actual API Key and API Secret** from
-the [Zoom Marketplace](https://marketplace.zoom.us/):
+the [Zoom Marketplace](https://marketplace.zoom.us/)
 
 ```text
 ZM_KEY={{ YOUR API KEY HERE }}
@@ -66,7 +66,7 @@ ZM_SECRET={{ YOUR API SECRET HERE }}
 
 As the default database for this project lives in-memory each time you restart the server the database will be cleared.
 See our section on
-[Configuring MongoDB](#configuring-mongodb).
+[Configuring MongoDB](#configuring-mongodb)
 
 #### Development
 
@@ -95,6 +95,14 @@ npm run start
 
 Navigate to http://localhost:3000 to view the home page or go to `/r/:webinar_id` and the app will guide you through the
 registration process.
+
+You can change the port the server uses in your .env file:
+
+```shell
+ZM_KEY=...
+ZM_SECRET=...
+PORT=8080
+```
 
 ## Deployment
 
