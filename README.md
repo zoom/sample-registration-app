@@ -48,13 +48,8 @@ npm install
 
 ### Add Your Credentials
 
-Create a .env file in the current directory
-
-```shell
-touch .env
-```
-
-Edit the file and add the following text replacing the fields with **your actual API Key and API Secret** from
+1. Open the [.env](.env) file in the project root 
+2. Replace the fields with **your API Key and API Secret** from
 the [Zoom Marketplace](https://marketplace.zoom.us/)
 
 ```text
@@ -74,7 +69,7 @@ To start the server in development mode run the NPM `dev` script. This will do t
 
 1. Send detailed logs to the server console and error pages
 2. Restart the server on changes to server files - this will clear the in-memory DB
-    1. To change this use a standard mongod instance
+    1. To change this use a standard mongodb instance
     2. or use `node` instead of `nodemon` for the `dev` script in [package.json](package.json)
     3. or start the server using the `start` NPM script (see next section)
 
@@ -85,7 +80,7 @@ npm run dev
 #### Production
 
 You can use the `start` script to run the server in production mode. This allows the app to run faster but it does not
-log by default and does watch for files changes.
+log by default and does not watch for files changes.
 
 ```shell
 npm run start
@@ -130,8 +125,8 @@ Please send pull requests and issues to this project for any issues or suggestio
 
 ### Code Style
 
-This project uses eslint to enforce a coding style along with a pre-commit git hook to ensure files pass linting prior
-to commit.
+This project uses eslint to protect against coding errors along with a pre-commit git hook to ensure files pass linting prior
+to commit. A code style isn't enforced but the project is compatible with [prettier](prettier.io).
 
 You can run `npm run lint` to see the linter errors directly or your can use `npm run lint-fix` to have eslint try to
 fix the issues for you. Most IDEs can also automatically fix linter errors as you save.
@@ -139,7 +134,7 @@ fix the issues for you. Most IDEs can also automatically fix linter errors as yo
 ### Testing
 
 At this time there are no e2e or unit tests. I encourage you to create a pull request adding tests! I
-hear [Cypress](https://www.cypress.io/) is a great framework :)
+hear [Cypress](https://www.cypress.io/) is a great project :)
 
 ## Need help?
 
