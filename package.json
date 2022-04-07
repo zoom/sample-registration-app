@@ -5,14 +5,14 @@
   "exports": "./bin/server.js",
   "private": true,
   "scripts": {
-    "start": "NODE_ENV=production node server",
-    "dev": "DEBUG=SRA:*,axios NODE_ENV=development nodemon --unhandled-rejections=strict --trace-warnings --trace-deprecation server",
+    "start": "node server",
+    "dev": "DEBUG=SRA:* nodemon -q server",
     "lint": "eslint .",
-    "lint-fix": "eslint . --fix"
+    "lint-fix": "eslint . --fix",
+    "postinstall": "[[ -f .env ]] || cp -r .env{.sample,}"
   },
   "dependencies": {
     "axios": "^0.25.0",
-    "axios-debug-log": "^0.8.4",
     "axios-request-throttle": "^1.0.0",
     "compression": "^1.7.4",
     "cookie-parser": "~1.4.4",

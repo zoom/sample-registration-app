@@ -1,3 +1,8 @@
+### dotenv environment variables file
+.env
+.env.*
+!.env.sample
+
 ### VisualStudioCode template
 .vscode
 
@@ -119,12 +124,6 @@ web_modules/
 # Yarn Integrity file
 .yarn-integrity
 
-### dotenv environment variables file
-# don't ignore .env here ignore changes at the git repo level
-#.env
-
-# ignore all other .env files
-.env.*
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
@@ -475,9 +474,6 @@ _Pvt_Extensions
 # Paket dependency manager
 .paket/paket.exe
 paket-files/
-
-# FAKE - F# Make
-.fake/
 
 # CodeRush personal settings
 .cr/personal

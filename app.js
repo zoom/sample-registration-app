@@ -15,9 +15,6 @@ import dotenv from 'dotenv'
 import axios from 'axios'
 import axiosThrottle from 'axios-request-throttle'
 
-/* eslint-disable-next-line no-unused-vars */
-import axiosDebugLog from 'axios-debug-log'
-
 import indexRouter from './server/routes/index.js'
 import registrationRouter from './server/routes/registration.js'
 
@@ -53,9 +50,33 @@ function setAuthHeader(token) {
 /* App Config */
 const app = express()
 
+axios.defaults.baseURL = 'https://api.zoom.us/v2'
+
+// log Axios requests and responses
+const logFunc = (r) => {
+    if (process.env.NODE_ENV !== 'production') {
+        const { method, status, url, baseURL, config } = r;
+
+        const endp = url || config?.url;
+        const base = baseURL || config?.baseURL;
+        let str = new URL(endp, base).href;
+
+        if (method) str = `${method.toUpperCase()} ${str}`;
+        if (status) str = `${status} ${str}`;
+
+        debug(`SRA:axios`)(str);
+    }
+
+    return r;
+};
+
+axios.interceptors.request.use(logFunc);
+axios.interceptors.response.use(logFunc);
+
 // throttle requests to the Zoom API so they fit within the light rate limits
 axiosThrottle.use(axios, {requestsPerSecond: 30})
-axios.defaults.baseURL = 'https://api.zoom.us/v2'
+
+
 
 app.locals.generateJWT = generateJWT
 app.locals.setAuthHeader = setAuthHeader
