@@ -12,21 +12,21 @@
     "postinstall": "[[ -f .env ]] || cp -r .env{.sample,}"
   },
   "dependencies": {
-    "axios": "^0.25.0",
+    "axios": "^1.7.7",
     "axios-request-throttle": "^1.0.0",
     "compression": "^1.7.4",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^14.2.0",
-    "express": "~4.16.1",
+    "express": "^4.21.1",
     "express-handlebars": "^6.0.2",
     "express-validator": "^6.14.0",
     "hbs": "^4.2.0",
     "http-errors": "~1.6.3",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.2",
     "moment": "^2.29.2",
     "mongodb-memory-server": "^8.2.0",
-    "mongoose": "^6.1.8",
+    "mongoose": "^8.5.3",
     "morgan": "~1.9.1",
     "supports-color": "^9.2.1"
   },
@@ -36,6 +36,6 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-html": "^6.2.0",
     "eslint-plugin-import": "^2.25.4",
-    "nodemon": "^2.0.15"
+    "nodemon": "^3.1.7"
   }
 }
