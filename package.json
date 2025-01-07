@@ -1,6 +1,6 @@
 {
   "name": "sample-registration-app",
-  "version": "0.0.3",
+  "version": "1.0.3",
   "type": "module",
   "exports": "./bin/server.js",
   "private": true,
@@ -12,7 +12,7 @@
     "postinstall": "[[ -f .env ]] || cp -r .env{.sample,}"
   },
   "dependencies": {
-    "axios": "^1.7.7",
+    "axios": "^1.7.9",
     "axios-request-throttle": "^1.0.0",
     "compression": "^1.7.4",
     "cookie-parser": "~1.4.4",
