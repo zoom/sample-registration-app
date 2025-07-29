@@ -27,7 +27,7 @@
     "moment": "^2.29.2",
     "mongodb-memory-server": "^8.2.0",
     "mongoose": "^8.5.3",
-    "morgan": "~1.9.1",
+    "morgan": "^1.10.1",
     "supports-color": "^9.2.1"
   },
   "devDependencies": {
