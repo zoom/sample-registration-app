@@ -21,7 +21,6 @@
     "express": "^4.21.1",
     "express-handlebars": "^6.0.2",
     "express-validator": "^6.14.0",
-    "hbs": "^4.2.0",
     "http-errors": "~1.6.3",
     "jsonwebtoken": "^9.0.2",
     "moment": "^2.29.2",
