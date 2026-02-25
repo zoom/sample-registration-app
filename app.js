@@ -10,7 +10,6 @@ import logger from 'morgan'
 import debug from 'debug'
 
 import jwt from 'jsonwebtoken'
-import dotenv from 'dotenv'
 
 import axios from 'axios'
 import axiosThrottle from 'axios-request-throttle'
@@ -21,7 +20,6 @@ import registrationRouter from './server/routes/registration.js'
 const dbg = debug('SRA:app')
 const errs = debug('SRA:errors')
 
-dotenv.config()
 const {ZM_KEY, ZM_SECRET} = process.env
 
 /**
@@ -138,7 +136,7 @@ app.use((err, req, res, next) => {
 })
 
 // redirect users to the home page if they get a 404 route
-app.get('*', (req, res) => {
+app.get('*path', (req, res) => {
     res.redirect('/')
 })
 
