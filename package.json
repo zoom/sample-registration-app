@@ -12,25 +12,25 @@
     "postinstall": "[[ -f .env ]] || cp -r .env{.sample,}"
   },
   "dependencies": {
-    "axios": "^1.13.5",
+    "axios": "^1.21.1",
     "axios-request-throttle": "^1.0.0",
-    "compression": "^1.8.1",
+    "compression": "^1.8.2",
     "cookie-parser": "~1.4.7",
     "debug": "~4.4.3",
-    "express": "^5.2.1",
-    "express-handlebars": "^8.0.6",
+    "express": "^5.3.0",
+    "express-handlebars": "^8.0.7",
     "express-validator": "^7.3.1",
     "http-errors": "~2.0.1",
     "jsonwebtoken": "^9.0.3",
-    "moment": "^2.30.1",
-    "mongodb-memory-server": "^11.2.0",
-    "mongoose": "^9.2.2",
-    "morgan": "^1.10.1",
+    "moment": "^2.31.0",
+    "mongodb-memory-server": "^11.3.0",
+    "mongoose": "^9.12.2",
+    "morgan": "^1.12.1",
     "supports-color": "^10.2.2"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "eslint": "^10.0.2",
+    "eslint": "^10.15.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-html": "^8.1.4",
     "eslint-plugin-import": "^2.32.0",
@@ -40,9 +40,11 @@
   "overrides": {
     "eslint-plugin-import": {
       "eslint": "$eslint"
-    }
+    },
+    "mongodb": "^7.9.1"
   },
   "comments": {
-    "overrides": "eslint-plugin-import@2.32.0 (latest) still declares a peer range of eslint <=9, which breaks `npm install` against our eslint ^10. The plugin itself works correctly under eslint 10 (`npm run lint` passes), so this override relaxes the peer declaration to match our installed eslint. Remove it once eslint-plugin-import publishes a release supporting eslint 10."
+    "overrides": "eslint-plugin-import@2.32.0 (latest) still declares a peer range of eslint <=9, which breaks `npm install` against our eslint ^10. The plugin itself works correctly under eslint 10 (`npm run lint` passes), so this override relaxes the peer declaration to match our installed eslint. Remove it once eslint-plugin-import publishes a release supporting eslint 10.",
+    "overrides.mongodb": "mongoose@9.12.2 pins mongodb ~7.8 and mongodb-memory-server-core@11.3.0 pins ~7.5.0; both ranges contain only vulnerable releases (CVE-2026-119179, CVE-2026-126835, CVE-2026-126837, fixed in 7.9.0). Force the latest mongodb 7.x (same major, no breaking changes). Remove once upstream ranges include >=7.9.0."
   }
 }
