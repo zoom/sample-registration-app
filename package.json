@@ -18,7 +18,7 @@
     "cookie-parser": "~1.4.7",
     "debug": "~4.4.3",
     "express": "^5.3.0",
-    "express-handlebars": "^8.0.7",
+    "express-handlebars": "^9.0.6",
     "express-validator": "^7.3.1",
     "http-errors": "~2.0.1",
     "jsonwebtoken": "^9.0.3",
@@ -41,10 +41,14 @@
     "eslint-plugin-import": {
       "eslint": "$eslint"
     },
-    "mongodb": "^7.9.1"
+    "mongodb": "^7.9.1",
+    "nodemon": {
+      "minimatch": "^11.0.9"
+    }
   },
   "comments": {
     "overrides": "eslint-plugin-import@2.32.0 (latest) still declares a peer range of eslint <=9, which breaks `npm install` against our eslint ^10. The plugin itself works correctly under eslint 10 (`npm run lint` passes), so this override relaxes the peer declaration to match our installed eslint. Remove it once eslint-plugin-import publishes a release supporting eslint 10.",
-    "overrides.mongodb": "mongoose@9.12.2 pins mongodb ~7.8 and mongodb-memory-server-core@11.3.0 pins ~7.5.0; both ranges contain only vulnerable releases (CVE-2026-119179, CVE-2026-126835, CVE-2026-126837, fixed in 7.9.0). Force the latest mongodb 7.x (same major, no breaking changes). Remove once upstream ranges include >=7.9.0."
+    "overrides.mongodb": "mongoose@9.12.2 pins mongodb ~7.8 and mongodb-memory-server-core@11.3.0 pins ~7.5.0; both ranges contain only vulnerable releases (CVE-2026-119179, CVE-2026-126835, CVE-2026-126837, fixed in 7.9.0). Force the latest mongodb 7.x (same major, no breaking changes). Remove once upstream ranges include >=7.9.0.",
+    "overrides.nodemon": "nodemon@3.1.14 (latest) depends on minimatch ^10.2.1, and every 10.x release is affected by GHSA-g3hv-75wg-m249 (fixed in 11.0.1). nodemon only calls minimatch(file, pattern, { nocase, windowsPathsNoEscape }), which is unchanged in 11 (only makeRe, debug and internal methods were removed). Remove once nodemon depends on minimatch >=11.0.1."
   }
 }
